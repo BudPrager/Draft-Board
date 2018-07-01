@@ -1,0 +1,122 @@
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.js"></script>
+  <style type="text/css">
+    #header {
+  text-align: center;
+}
+
+#draftBoard {
+  height: 80%;
+  width: 100%;
+  padding: 0.25%;
+}
+
+#footer{
+  clear: both;
+  color: light-gray;
+}
+
+.cell {
+  width: 9.5%;
+  height: 100%;
+  border: 1px solid black;
+  float: left;
+}
+
+.playerHeader {
+    text-align: center;
+    font-size: 2em;
+	line-height: 200%;
+}
+
+.roundHeader {
+	text-align: center;
+    font-size: 2em;
+	line-height: 200%;
+	width: 3%
+}
+
+.roundRow {
+  overflow-x: none;
+  clear: both;
+  height: 7%;
+}
+
+.playerInfo{
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+    font-size: 1.3em;
+	line-height: 140%;
+}
+
+.teamLogo{
+	width: 20%;
+	display: inline-block;
+	vertical-align: middle;
+	padding: 5px;	
+}
+
+  </style>
+
+  <title></title>
+
+<script type="text/javascript">
+
+
+$(document).ready(function() {
+  var canvas = $('#draftBoard');
+  
+  var players = 10;
+  var rounds = 15;
+  
+  for (var i = 0; i <= rounds; i++) {
+    canvas.append("<div id='round" + i + "' class='roundRow'></div>");
+    var roundRow = $("#round" + i);
+    if (i === 0) {
+      roundRow.addClass("playerHeader");
+    }
+
+    for (var j = 0; j <= players; j++) {
+      roundRow.append("<div id='playerCell" + j + "' class = 'cell'>&nbsp;</div>");
+      var playerCell = $('#round' + i + ' > #playerCell' + j);
+			
+      if (i === 0 && j !== 0) {
+        console.log("{0: " + i + ", A: " + j + "}");
+        playerCell.text("Player " + j);
+      }else if(j === 0){
+      	console.log("{A: " + i + ", 0: " + j + "}");
+        playerCell.addClass("roundHeader");
+        if(i !== 0) {playerCell.text("R" + i);}
+      } else if (j !== 0 && i !== 0) {
+        console.log("{A: " + i + ", A: " + j + "}");
+        playerCell.addClass("playerPick");
+      }
+    }
+  }
+  
+  $(".playerPick").html("<img class='teamLogo' src='logo.jpg'/><span class='playerInfo'>Lastname, FN<br/>F - TOT</span>");
+});
+
+
+</script>
+
+  
+</head>
+
+<body>
+  <div id="header">
+<h1>
+Draft Board
+</h1>
+</div>
+<div id="draftBoard"></div> 
+<div id="footer">
+(C) Cridland Enterprises 2018
+</div>
+
+</body></html>
